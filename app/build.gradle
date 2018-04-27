@@ -8,7 +8,13 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
     }
     buildTypes {
         release {
@@ -48,11 +54,31 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    testImplementation 'junit:junit:4.12'
+    implementation rootProject.ext.dependencies["constraint-layout"]
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["design"]
+    implementation rootProject.ext.dependencies["cardview-v7"]
+    testImplementation rootProject.ext.dependencies["junit"]
     // LeakCanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     // 调试工具
-    debugImplementation 'com.facebook.stetho:stetho:1.5.0'
+    debugImplementation rootProject.ext.dependencies["facebook-stetho"]
+    implementation rootProject.ext.dependencies["rxjava2"]
+    implementation rootProject.ext.dependencies["rxjava2-rxandroid"]
+    implementation rootProject.ext.dependencies["retrofit2"]
+    implementation rootProject.ext.dependencies["retrofit2-adapter-rxjava"]
+    implementation rootProject.ext.dependencies["converter-gson"]
+    implementation rootProject.ext.dependencies["Gson"]
+    implementation rootProject.ext.dependencies["okhttp-urlconnection"]
+    implementation rootProject.ext.dependencies["google-dagger"]
+    implementation rootProject.ext.dependencies["dagger-android-support"]
+    implementation rootProject.ext.dependencies["material-dialog"]
+    implementation rootProject.ext.dependencies["dagger-android"]
+    implementation rootProject.ext.dependencies["multi-dex"]
+    annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]
+    provided rootProject.ext.dependencies["javax.annotation"]
+    annotationProcessor rootProject.ext.dependencies["javax.annotation"]
+    annotationProcessor rootProject.ext.dependencies["dagger.compiler"]
+    implementation project(':commonlibrary')
+    implementation project(':loginmodule')
 }
